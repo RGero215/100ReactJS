@@ -1,0 +1,130 @@
+{% extends "blog/base.html" %}
+{% load static from staticfiles %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="tile">
+                    <div class="wrapper">
+                        <div class="header">{{ object.player }} vs {{player.player}}</div>
+
+                        <div class="banner-img">
+                            <img src="{{ object.image.url }}" alt="Image 1">
+                        </div>
+
+                        <div class="dates">
+                            <div class="start">
+                                <strong>AVERAGE</strong> {{object.avg}} | {{player.avg}}
+                                <span></span>
+                            </div>
+                            <div class="ends">
+                                <strong>POINTS</strong> {{object.points}} | {{player.points}}
+                            </div>
+                        </div>
+
+                        <div class="stats">
+
+                            <div>
+                                <strong>AT BATS</strong> {{object.atBats}} | {{player.atBats}}
+                            </div>
+
+                            <div>
+                                <strong>RBI</strong> {{object.rbi}} | {{player.rbi}}
+                            </div>
+
+                            <div>
+                                <strong>SLG</strong> {{object.slg}} | {{player.slg}}
+                            </div>
+
+                        </div>
+
+                        <div class="stats">
+
+                            <div>
+                                <strong>SINGLES</strong> {{object.singles}} | {{player.singles}}
+                            </div>
+
+                            <div>
+                                <strong>DOUBLES</strong> {{object.doubles}} | {{player.doubles}}
+                            </div>
+
+                            <div>
+                                <strong>TRIPLES</strong> {{object.triples}} | {{player.triples}}
+                            </div>
+
+                        </div>
+
+                        <div class="stats">
+
+                            <div>
+                                <strong>HOME RUNS</strong> {{object.homeRuns}} | {{player.homeRuns}}
+                            </div>
+
+                            <div>
+                                <strong>LEFT ON BASES</strong> {{object.lob}} | {{player.lob}}
+                            </div>
+
+                            <div>
+                                <strong>RUNS</strong> {{object.runs}} | {{player.runs}}
+                            </div>
+
+                        </div>
+
+                        <div class="stats">
+
+                                <div>
+                                    <strong>HITS</strong> {{object.hits}} | {{player.hits}}
+                                </div>
+    
+                                <div>
+                                    <strong>RESULT</strong> {{object.result}} | {{player.result}}
+                                </div>
+    
+                                <div>
+                                    <strong>GRAND SLAM</strong> {{object.grandSlam}} | {{player.grandSlam}}
+                                </div>
+    
+                        </div>
+
+                        <div class="stats">
+
+                                <div>
+                                    <strong>OFF</strong> {{object.off}} | {{player.off}}
+                                </div>
+    
+                                <div>
+                                    <strong>STOP</strong> {{object.stop}} | {{player.stop}}
+                                </div>
+    
+                                <div>
+                                    <strong>AWAY</strong> {{object.away}} | {{player.home}}
+                                </div>
+    
+                        </div>
+
+                        <div class="stats">
+
+                                <div>
+                                    <strong>RISK</strong> {{object.risk}} | {{player.risk}}
+                                </div>
+    
+                                <div>
+                                    <strong>SAFE</strong> {{object.safe}} | {{player.safe}}
+                                </div>
+    
+                                <div>
+                                    <strong>CREATED</strong> {{object.createdAt | date:'F d, Y'}}
+                                </div>
+    
+                        </div>
+
+                        <div class="footer">
+                            <a href="#" class="Cbtn btn-outline-primary">{{object.level}}</a>
+                            <a href="{% url 'test-play' player.id %}" class="Cbtn btn-primary">PLAY AGAIN</a>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+{% endblock %}

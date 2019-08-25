@@ -1,0 +1,132 @@
+{% extends "blog/base.html" %}
+{% load static from staticfiles %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% for test in tests %}
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="tile">
+                        <div class="wrapper">
+                            <div class="header">{{ test.player }}</div>
+
+                            <div class="banner-img">
+                                <img src="{{ test.image.url }}" alt="Image 1">
+                            </div>
+
+                            <div class="dates">
+                                <div class="start">
+                                    <strong>AVERAGE</strong> {{test.avg}}
+                                    <span></span>
+                                </div>
+                                <div class="ends">
+                                    <strong>POINTS</strong> {{test.points}}
+                                </div>
+                            </div>
+
+                            <div class="stats">
+
+                                <div>
+                                    <strong>AT BATS</strong> {{test.atBats}}
+                                </div>
+
+                                <div>
+                                    <strong>RBI</strong> {{test.rbi}}
+                                </div>
+
+                                <div>
+                                    <strong>SLG</strong> {{test.slg}}
+                                </div>
+
+                            </div>
+
+                            <div class="stats">
+
+                                <div>
+                                    <strong>SINGLES</strong> {{test.singles}}
+                                </div>
+
+                                <div>
+                                    <strong>DOUBLES</strong> {{test.doubles}}
+                                </div>
+
+                                <div>
+                                    <strong>TRIPLES</strong> {{test.triples}}
+                                </div>
+
+                            </div>
+
+                            <div class="stats">
+
+                                <div>
+                                    <strong>HOME RUNS</strong> {{test.homeRuns}}
+                                </div>
+
+                                <div>
+                                    <strong>LEFT ON BASES</strong> {{test.lob}}
+                                </div>
+
+                                <div>
+                                    <strong>RUNS</strong> {{test.runs}}
+                                </div>
+
+                            </div>
+
+                            <div class="stats">
+
+                                    <div>
+                                        <strong>HITS</strong> {{test.hits}}
+                                    </div>
+        
+                                    <div>
+                                        <strong>RESULT</strong> {{test.result}}
+                                    </div>
+        
+                                    <div>
+                                        <strong>GRAND SLAM</strong> {{test.grandSlam}}
+                                    </div>
+        
+                            </div>
+
+                            <div class="stats">
+
+                                    <div>
+                                        <strong>OFF</strong> {{test.off}}
+                                    </div>
+        
+                                    <div>
+                                        <strong>STOP</strong> {{test.stop}}
+                                    </div>
+        
+                                    <div>
+                                        <strong>AWAY</strong> {{test.away}}
+                                    </div>
+        
+                            </div>
+
+                            <div class="stats">
+
+                                    <div>
+                                        <strong>RISK</strong> {{test.risk}}
+                                    </div>
+        
+                                    <div>
+                                        <strong>SAFE</strong> {{test.safe}}
+                                    </div>
+        
+                                    <div>
+                                        <strong>CREATED</strong> {{test.createdAt | date:'F d, Y'}}
+                                    </div>
+        
+                            </div>
+
+                            <div class="footer">
+                                <a href="#" class="Cbtn btn-outline-primary">LIKE</a>
+                                <a href="{% url 'test-play' test.id %}" class="Cbtn btn-primary">PLAY</a>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

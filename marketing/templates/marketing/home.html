@@ -1,0 +1,112 @@
+{% extends 'blog/base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+    <h1>100React World Series</h1>
+    <h4>Group {{ page_obj.number}}</h4>
+    <div class="group1"></div>
+    <div class="group2"></div>
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a class="btn btn-primary btn-sm mb-4" href="?page=1">First</a>
+            <a class="btn btn-outline-primary btn-sm mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif%}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class="btn btn-primary btn-sm mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-primary btn-sm mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-primary btn-sm mb-4" href="?page={{page_obj.next_page_number}}">Next</a>
+            <a class="btn btn-outline-primary btn-sm mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif%}
+
+    {% endif %}
+    {% block scripts %}
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script type="text/javascript" src="{% static 'API100React/js/jquery.bracket.min.js' %}"></script>
+            <script>
+                if("{{page_obj.number}}" === "1"){
+                    var group = {
+                                    teams : [
+                                        ["{{group1.player_one}}",  "{{ group1.player_two }}" ],
+                                        ["{{group1.player_three}}",  "{{ group1.player_four}}" ],
+                                        ["{{group1.player_five}}",  "{{ group1.player_six }}" ],
+                                        ["{{group1.player_seven}}",  "{{ group1.player_eight }}" ],
+                                        ["{{group1.player_nine}}",  "{{ group1.player_ten }}" ],
+                                        ["{{group1.player_eleven}}",  "{{ group1.player_twelve }}" ],
+                                        ["{{group1.player_thirteen}}",  "{{ group1.player_fourteen }}" ],
+                                        ["{{group1.player_fifteen}}",  "{{ group1.player_sixteen }}" ],
+                                    ],
+                                    //   results : [[ /* WINNER BRACKET */
+                                    //     [[3,5], [2,4], [6,3], [2,3], [1,5], [5,3], [7,2], [1,2]],
+                                    //     [[1,2], [3,4], [5,6], [7,8]],
+                                    //     [[9,1], [8,2]],
+                                    //     [[1,3]]
+                                    //   ], [         /* LOSER BRACKET */
+                                    //     [[5,1], [1,2], [3,2], [6,9]],
+                                    //     [[8,2], [1,2], [6,2], [1,3]],
+                                    //     [[1,2], [3,1]],
+                                    //     [[3,0], [1,9]],
+                                    //     [[3,2]],
+                                    //     [[4,2]]
+                                    //   ], [         /* FINALS */
+                                    //     [[3,8], [1,2]],
+                                    //     [[2,1]]
+                                    //   ]]
+                                    results: []
+                                }
+                } else if ("{{page_obj.number}}" === "2") {
+                    var group = {
+                                    teams : [
+                                        ["{{group2.player_one}}",  "{{ group2.player_two }}" ],
+                                        ["{{group2.player_three}}",  "{{ group2.player_four}}" ],
+                                        ["{{group2.player_five}}",  "{{ group2.player_six }}" ],
+                                        ["{{group2.player_seven}}",  "{{ group2.player_eight }}" ],
+                                        ["{{group2.player_nine}}",  "{{ group2.player_ten }}" ],
+                                        ["{{group2.player_eleven}}",  "{{ group2.player_twelve }}" ],
+                                        ["{{group2.player_thirteen}}",  "{{ group2.player_fourteen }}" ],
+                                        ["{{group2.player_fifteen}}",  "{{ group2.player_sixteen }}" ],
+                                    ],
+                                    //   results : [[ /* WINNER BRACKET */
+                                    //     [[3,5], [2,4], [6,3], [2,3], [1,5], [5,3], [7,2], [1,2]],
+                                    //     [[1,2], [3,4], [5,6], [7,8]],
+                                    //     [[9,1], [8,2]],
+                                    //     [[1,3]]
+                                    //   ], [         /* LOSER BRACKET */
+                                    //     [[5,1], [1,2], [3,2], [6,9]],
+                                    //     [[8,2], [1,2], [6,2], [1,3]],
+                                    //     [[1,2], [3,1]],
+                                    //     [[3,0], [1,9]],
+                                    //     [[3,2]],
+                                    //     [[4,2]]
+                                    //   ], [         /* FINALS */
+                                    //     [[3,8], [1,2]],
+                                    //     [[2,1]]
+                                    //   ]]
+                                    results: []
+                                }
+                }
+
+                var resizeParameters = {
+                                    teamWidth: 100,
+                                    scoreWidth: 20,
+                                    matchMargin: 30,
+                                    roundMargin: 50,
+                                    init: group
+                                };
+
+                // $(function() { $('.tournament').bracket({init: bigData}) })
+                function updateResizeDemo() {
+                        $('.group1').bracket(resizeParameters);    
+                }
+                
+                $(updateResizeDemo)
+
+            </script>
+    {% endblock%}
+    
+{% endblock content %}

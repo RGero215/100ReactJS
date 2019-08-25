@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+    <div class="app">
+        <div class="container stopwatch">
+            <div class="clock inactive z-depth-1">
+                <img class="stadium" src="{% static 'API100React/img/d1.jpeg' %}" alt="stadium">
+                <img class="empty" src="{% static 'API100React/img/empty.png' %}" alt="empty">
+                <img class="noOuts" src="{% static 'API100React/img/noOuts.png' %}" alt="empty">
+                <h1 class="away">AWAY</h1>
+                <h1 class="awayScore">10</h1>
+                <h1 class="homeScore">0</h1>
+                {% if  user.is_authenticated %}
+                    <h1 class="username">{{ user.username }}</h1>
+                    <input class="userId" type="hidden" value="{{user.id}}">
+                {% else %}
+                    <h1 class="username">HOME</h1>
+                {% endif %}
+                <h1 class="inn">In</h1>
+                <h1 class="innNo">1</h1>
+                <span class="counter" id="fiveSE">0</span>
+                <div class="overlay waves-effect"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

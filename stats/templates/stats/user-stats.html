@@ -1,0 +1,132 @@
+{% extends "blog/base.html" %}
+{% load static from staticfiles %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% for stat in stats %}
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="tile">
+                        <div class="wrapper">
+                            <div class="header">{{ stat.player }}</div>
+
+                            <div class="banner-img">
+                                <img src="{{ stat.image.url }}" alt="Image 1">
+                            </div>
+
+                            <div class="dates">
+                                <div class="start">
+                                    <strong>AVERAGE</strong> {{stat.avg}}
+                                    <span></span>
+                                </div>
+                                <div class="ends">
+                                    <strong>POINTS</strong> {{stat.points}}
+                                </div>
+                            </div>
+
+                            <div class="stats">
+
+                                <div>
+                                    <strong>AT BATS</strong> {{stat.atBats}}
+                                </div>
+
+                                <div>
+                                    <strong>RBI</strong> {{stat.rbi}}
+                                </div>
+
+                                <div>
+                                    <strong>SLG</strong> {{stat.slg}}
+                                </div>
+
+                            </div>
+
+                            <div class="stats">
+
+                                <div>
+                                    <strong>SINGLES</strong> {{stat.singles}}
+                                </div>
+
+                                <div>
+                                    <strong>DOUBLES</strong> {{stat.doubles}}
+                                </div>
+
+                                <div>
+                                    <strong>TRIPLES</strong> {{stat.triples}}
+                                </div>
+
+                            </div>
+
+                            <div class="stats">
+
+                                <div>
+                                    <strong>HOME RUNS</strong> {{stat.homeRuns}}
+                                </div>
+
+                                <div>
+                                    <strong>LEFT ON BASES</strong> {{stat.lob}}
+                                </div>
+
+                                <div>
+                                    <strong>RUNS</strong> {{stat.runs}}
+                                </div>
+
+                            </div>
+
+                            <div class="stats">
+
+                                    <div>
+                                        <strong>HITS</strong> {{stat.hits}}
+                                    </div>
+        
+                                    <div>
+                                        <strong>RESULT</strong> {{stat.result}}
+                                    </div>
+        
+                                    <div>
+                                        <strong>GRAND SLAM</strong> {{stat.grandSlam}}
+                                    </div>
+        
+                            </div>
+
+                            <div class="stats">
+
+                                    <div>
+                                        <strong>OFF</strong> {{stat.off}}
+                                    </div>
+        
+                                    <div>
+                                        <strong>STOP</strong> {{stat.stop}}
+                                    </div>
+        
+                                    <div>
+                                        <strong>AWAY</strong> {{stat.away}}
+                                    </div>
+        
+                            </div>
+
+                            <div class="stats">
+
+                                    <div>
+                                        <strong>RISK</strong> {{stat.risk}}
+                                    </div>
+        
+                                    <div>
+                                        <strong>SAFE</strong> {{stat.safe}}
+                                    </div>
+        
+                                    <div>
+                                        <strong>CREATED</strong> {{stat.createdAt | date:'F d, Y'}}
+                                    </div>
+        
+                            </div>
+
+                            <div class="footer">
+                                <a href="#" class="Cbtn btn-outline-primary">{{stat.level}}</a>
+                                <a href="{% url 'play-card' stat.id %}" class="Cbtn btn-primary">PLAY</a>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

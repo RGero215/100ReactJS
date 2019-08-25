@@ -1,0 +1,272 @@
+{% load static from staticfiles %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'API100React/css/bootstrap.min.css' %}" crossorigin="anonymous">
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'API100React/css/mdb.min.css' %}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{% static 'API100React/css/style.css' %}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{% static 'API100React/css/main.css' %}" rel="stylesheet">
+    {% if view.title == 'Take-Test' or 'Play' in view.title and 'Detail' not in view.title %}
+      <link href="{% static 'API100React/css/styles2.css' %}" rel="stylesheet">
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'API100React/css/jquery.bracket.min.css' %}">
+    {% if object or stats or tests and 'Detail' in view.title  %}
+      {% if view.title != 'Post' %}
+        <link href="{% static 'API100React/css/card.css' %}" rel="stylesheet">
+      {% endif %}
+    {% endif %}
+    {% if view.title %}
+        <title>{{ view.title }}</title>
+    {% else %}
+        <title>100React</title>
+    {% endif %}
+
+    <!-- Analytics -->
+    <script>
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+      analytics.load("1Bm91PzvIPl2oL7byFeTEwT0ZosrLznH");
+      analytics.page();
+      analytics.identify({
+        username: '{{user.username}}',
+        email: '{{object.email}}',
+        testId: '{{object.id}}',
+        userId: '{{user.id}}',
+        player: '{{object.player}}',
+        userEmail: '{{user.email}}',
+      });
+      }}();
+    </script>
+
+  </head>
+  <body>
+      <header class="site-header">
+        <!--Navbar -->
+        <nav class="mb-1 navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'test-create' %}">
+                <img src="{% static 'API100React/img/100React.png' %}" class="d-inline-block align-middle rounded-circle z-depth-0 logo"
+                alt="mdb logo"> 100React 
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+                aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'marketing-home' %}">Tournament
+                        <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'test-test' %}">Test-Ranking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog-home' %}">Blog</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Dropdown
+                        </a>
+                        <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
+                        <a class="dropdown-item" href="{% url 'four-list' %}">Challenge</a>
+                        <a class="dropdown-item" href="{% url 'four-players' %}">Create Challenge</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto nav-flex-icons">
+                  {% if user.is_authenticated %}
+                      <li class="nav-item active">
+                        <a class="nav-link btn btn-outline-primary my-2 my-sm-0" href="{% url 'profile' %}"> Profile
+                          <span class="sr-only">(current)</span>
+                        </a>
+                      </li>
+                      <li class="nav-item active">
+                        <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="{% url 'logout' %}"> Logout
+                          <span class="sr-only">(current)</span>
+                        </a>
+                      </li>
+                      <li class="nav-item avatar dropdown">
+                          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">
+                              <img src="{{ user.profile.image.url }}" class="rounded-circle z-depth-0 avatar-image"
+                              alt="avatar image">
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                          aria-labelledby="navbarDropdownMenuLink-55">
+                              <a class="dropdown-item" href="{% url 'post-create' %}">New Post</a>
+                              <a class="dropdown-item" href="{% url 'stats-home'%}">Ranking</a>
+                              <a class="dropdown-item" href="{% url 'user-stats' user.username %}">User Stats</a>
+                              <a class="dropdown-item" href="{% url 'stat-play' %}">Play</a>
+                          </div>
+                      </li>
+                  {% else %}
+                      <li class="nav-item active">
+                        <a class="nav-link btn btn-outline-primary my-2 my-sm-0" href="{% url 'login' %}"> Login
+                          <span class="sr-only">(current)</span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="{% url 'register' %}"> Register </a>
+                      </li>
+                  {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <!--/.Navbar -->
+      </header>
+      <main role="main" class="container">
+        {% if view.title == 'Take-Test' %}
+          <div class="test-title">
+              <h1>Test Your Attention Span</h1>
+          </div>
+          <div class="test-subtitle col-sm-4 col-md-12 col-lg-4">
+              <h4>
+                  Click on the image and stop the counter on 97 for a single, 98 for a double,
+                  99 for a triple, 100 for a homerun and everything else is an out.
+                  See your baseball card after the test and check the leaders. No signup required
+                  for the test.
+                </h4>
+          </div>
+        {% endif %}
+
+        {% if 'Ranking' in view.title %}
+          <div class="test-title col-lg-8">
+              <h1>See Baseball Card</h1>
+          </div>
+          <div class="test-subtitle col-sm-4 col-md-12 col-lg-8">
+              <h4>
+                 You think you can beat the top ranks?
+                 See their stats inside and played against their stats to knocked them out. 
+              </h4>
+          </div>
+        {% endif %}
+        <div class="row">
+          <div class="col-md-8">
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-{{message.tags }} alert-dismissible fade show" role="alert">
+                  <strong>{{ message }}</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endfor %}
+            {% endif %}
+            {% block content %}{% endblock %}
+          </div>
+          {% if 'Play' not in view.title and request.get_full_path != "/" and view.title != 'Play-Two' %}
+            <div class="col-md-4">
+              <div class="content-section">
+                <h3>100React Scoreboard</h3>
+                <p class='text-muted'>Help us win our Kickstarter Campaign.
+                  <ul class="list-group">
+                    <li class="list-group-item list-group-item-light"><a href="https://www.kickstarter.com/projects/1945306321/313735944?ref=dyu8z7&token=0bca9e08" target="_blank">Kickstarter</a></li>
+                    <li class="list-group-item list-group-item-light"><a href="https://youtu.be/ycG_tktS2sQ" target="_blank">Video</a></li>
+                    <li class="list-group-item list-group-item-light">Referral Program</li>
+                    <li class="list-group-item list-group-item-light">Tax Deductible</li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </main>
+        <!-- Modal Section Test -->
+        {% if request.get_full_path == "/" or player and not object and view.title != 'Play-Card'  %}
+        <div class="bg-modal">
+            <div class="content-section">  
+                <form name="stats" action="" method="POST" id="stats" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <fieldset class="form-group">
+                      <legend class="border-bottom mb-4">Test</legend>
+                      <h4 class="title"></h4>
+                      <h6 class='off'> You were off by </h6>
+                      {{ form|crispy }}
+                  </fieldset>
+                  <div class="form-group">
+                      <button class="btn btn-outline-primary" type="submit">See Results</button>
+                  </div>   
+                </form>
+                <div class="border-top pt-3 modal-login">
+                    <small class="text-muted"> Already Have An Account? <a href="{% url 'login' %}" class="ml-2"> Sign In</a> </small>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    
+    <!-- Modal Section Play -->
+    {% if request.get_full_path == "/stats/play/" or player  and request.get_full_path != "/" and view.title != 'Play-Test' %}
+    <div class="bg-modal">
+        <div class="content-section">  
+            <form name="stats" action="" method="POST" id="stats" enctype="multipart/form-data">
+              {% csrf_token %}
+              <fieldset class="form-group">
+                  <legend class="border-bottom mb-4">Select A Photo</legend>
+                  <h4 class="title"></h4>
+                  <h6 class='result'></h6>
+                  {{ form|crispy }}
+              </fieldset>
+              <div class="form-group">
+                  <button class="btn btn-outline-primary" type="submit">See Results</button>
+              </div>   
+            </form>
+            <div class="border-top pt-3 modal-login">
+                <small class="text-muted"> Already Have An Account? <a href="{% url 'login' %}" class="ml-2"> Sign In</a> </small>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Modal Section Play Two -->
+    {% if view.title == 'Play-Two' %}
+    <div class="bg-modal">
+        <div class="content-section">  
+            <form name="stats" action="" method="POST" id="stats" enctype="multipart/form-data">
+              {% csrf_token %}
+              <fieldset class="form-group">
+                  <legend class="border-bottom mb-4">Select A Photo</legend>
+                  <h4 class="title"></h4>
+                  <h6 class='result'></h6>
+                  {{ form|crispy }}
+              </fieldset>
+              <div class="form-group">
+                  <button class="btn btn-outline-primary" type="submit">See Results</button>
+              </div>   
+            </form>
+            <div class="border-top pt-3 modal-login">
+                <small class="text-muted"> Already Have An Account? <a href="{% url 'login' %}" class="ml-2"> Sign In</a> </small>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    {% if request.get_full_path != "/stats/play/" and view.title != 'Play-Card' and view.title != 'Play-Two' %}
+    <!-- Test -->
+      <script src="https://drive.google.com/uc?export=download&id=1rdLBD67sxLlA4iU3WZ2CRGHil_4PSbL7" type="text/javascript"></script>
+    {% elif view.title == 'Play-Two' %}
+    <!-- Two -->
+      <script src="https://drive.google.com/uc?export=download&id=1yyketNaC4iqEIeVk6ovTJuiqbeeaO2B5" type="text/javascript"></script>
+    {% else %}
+    <!-- Play -->
+      <script src="https://drive.google.com/uc?export=download&id=1duMIXEwq8opS0PzpnGhuqTPTLu7xX7HI" type="text/javascript"></script>
+    {% endif %}
+
+    {% block scripts %} {% endblock %}
+  </body>
+</html>
