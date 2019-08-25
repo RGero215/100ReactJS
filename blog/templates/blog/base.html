@@ -9,20 +9,20 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'API100React/css/bootstrap.min.css' %}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" crossorigin="anonymous">
     <!-- Material Design Bootstrap -->
-    <link href="{% static 'API100React/css/mdb.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="{% static 'API100React/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="{% static 'API100React/css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
     {% if view.title == 'Take-Test' or 'Play' in view.title and 'Detail' not in view.title %}
-      <link href="{% static 'API100React/css/styles2.css' %}" rel="stylesheet">
+      <link href="{% static 'css/styles2.css' %}" rel="stylesheet">
     {% endif %}
-    <link rel="stylesheet" href="{% static 'API100React/css/jquery.bracket.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.bracket.min.css' %}">
     {% if object or stats or tests and 'Detail' in view.title  %}
       {% if view.title != 'Post' %}
-        <link href="{% static 'API100React/css/card.css' %}" rel="stylesheet">
+        <link href="{% static 'css/card.css' %}" rel="stylesheet">
       {% endif %}
     {% endif %}
     {% if view.title %}
@@ -53,7 +53,7 @@
         <!--Navbar -->
         <nav class="mb-1 navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="{% url 'test-create' %}">
-                <img src="{% static 'API100React/img/100React.png' %}" class="d-inline-block align-middle rounded-circle z-depth-0 logo"
+                <img src="{% static 'img/100React.png' %}" class="d-inline-block align-middle rounded-circle z-depth-0 logo"
                 alt="mdb logo"> 100React 
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
