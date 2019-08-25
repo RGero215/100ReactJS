@@ -160,7 +160,7 @@ MEDIA_URL    = '/media/'
 
 STATIC_ROOT = '../static/'
 
-MEDIA_ROOT = '../media/'
+MEDIA_ROOT = 'media'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
