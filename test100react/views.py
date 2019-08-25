@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Test100React
 from django.contrib import messages
+import os
 
 # Create your views here.
 class Test100ReactListView(ListView):
@@ -20,6 +21,7 @@ class Test100ReactCreate(CreateView):
     model = Test100React
     fields = '__all__'
     title = 'Take-Test'
+    print("USER: ", os.environ.get('USER'))
     
     def form_valid(self, form):
         messages.success(self.request, f'Hey {form.instance.player}, check your test100react rank')
