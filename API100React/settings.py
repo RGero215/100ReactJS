@@ -25,7 +25,7 @@ SECRET_KEY = 'fv2smq5zi0^)ic!y)al2!^c74a==0&&wur)w_(wdx1me(&k2c!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['167.71.251.44', '127.0.0.1', '100react.com']
+ALLOWED_HOSTS = ['167.71.251.44', '127.0.0.1', '100react.com', '167.71.251.44/marketing']
 
 
 # Application definition
