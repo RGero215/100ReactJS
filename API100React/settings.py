@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'fv2smq5zi0^)ic!y)al2!^c74a==0&&wur)w_(wdx1me(&k2c!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['157.245.1.79', '127.0.0.1']
 
@@ -137,16 +137,30 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 # PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
 
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),
 # )
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+
+    os.path.join(BASE_DIR, "static")
+
+]
+
+MEDIA_URL    = '/media/'
+
+STATIC_ROOT = '../static/'
+
+MEDIA_ROOT = '../media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
