@@ -1,0 +1,90 @@
+{% extends 'blog/base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+    <h1>Pomodoro Challenge</h1>
+    <div class="tournament"></div>
+    <table class="table table-hover table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Users</th>
+                <th scope="col">Play</th>
+              </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <th scope="row">{{object.player_one.id}}</th>
+                    <td>{{object.player_one}}</td>
+                    {% if player_one_final %}
+                        <td><a class=" btn-outline-danger btn-sm" disabled>Ended</a></td>
+                    {% elif user == object.player_one %}
+                        <td><a class=" btn-outline-primary btn-sm" href="{% url 'pomodoro-newgroup' object.id %}">Play</a></td>
+                    {% else %}
+                        <td><a class=" btn-outline-dark btn-sm" disabled>Waiting</a></td>
+                    {% endif %}
+                </a></tr>
+
+                <tr>
+                    <th scope="row">{{object.player_two.id}}</th>
+                    <td>{{object.player_two}}</td>
+                    {% if player_two_final %}
+                        <td><a class=" btn-outline-danger btn-sm" disabled>Ended</a></td>
+                    {% elif user == object.player_two %}
+                        <td><a class=" btn-outline-primary btn-sm" href="{% url 'pomodoro-newgroup' object.id %}">Play</a></td>
+                    {% else %}
+                        <td><a class=" btn-outline-dark btn-sm" disabled>Waiting</a></td>
+                    {% endif %}
+                </a></tr>
+
+                <tr>
+                    <th scope="row">{{object.player_three.id}}</th>
+                    <td>{{object.player_three}}</td>
+                    {% if player_three_final %}
+                        <td><a class=" btn-outline-danger btn-sm" disabled>Ended</a></td>
+                    {% elif user == object.player_three %}
+                        <td><a class=" btn-outline-primary btn-sm" href="{% url 'pomodoro-newgroup' object.id %}">Play</a></td>
+                    {% else %}
+                        <td><a class=" btn-outline-dark btn-sm" disabled>Waiting</a></td>
+                    {% endif %}
+                </a></tr>
+
+                <tr>
+                    <th scope="row">{{object.player_four.id}}</th>
+                    <td>{{object.player_four}}</td>
+                    {% if player_four_final %}
+                        <td><a class=" btn-outline-danger btn-sm" disabled>Ended</a></td>
+                    {% elif user == object.player_four %}
+                        <td><a class=" btn-outline-primary btn-sm" href="{% url 'pomodoro-newgroup' object.id %}">Play</a></td>
+                    {% else %}
+                        <td><a class=" btn-outline-dark btn-sm" disabled>Waiting</a></td>
+                    {% endif %}
+                </a></tr>
+                
+            </tbody>
+          </table>
+    {% block scripts %}
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{% static 'API100React/js/jquery.bracket.min.js' %}"></script>
+        <script>
+            var minData = {% autoescape off %}{{minData}}{% endautoescape %}
+                
+            var resizeParameters = {
+                teamWidth: 100,
+                scoreWidth: 20,
+                matchMargin: 30,
+                roundMargin: 50,
+                init: minData
+            };
+            
+            
+            function updateResizeDemo() {
+                $('.tournament').bracket(resizeParameters);
+            }
+            
+            $(updateResizeDemo)
+            
+        </script>
+    {% endblock%}
+    
+{% endblock content %}

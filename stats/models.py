@@ -5,6 +5,7 @@ from django.urls import reverse
 from PIL import Image
 from tournament.models import Four
 
+
 # Create your models here.
 class Statistics(models.Model):
     player = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -90,7 +91,7 @@ class OnePLayer(models.Model):
 class TwoGames(models.Model):
     four = models.ForeignKey(Four, on_delete=models.CASCADE)
     player = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='account.png', upload_to='one_player_pics')
+    image = models.ImageField(default='account.png', upload_to='two_games_pics')
     firstAtBats = models.IntegerField(default=0)
     firstAvg = models.IntegerField(default=0)
     firstDoubles = models.IntegerField(default=0)

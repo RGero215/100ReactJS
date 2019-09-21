@@ -18,6 +18,7 @@
     <link href="{% static 'API100React/css/main.css' %}" rel="stylesheet">
     {% if view.title == 'Take-Test' or 'Play' in view.title and 'Detail' not in view.title %}
       <link href="{% static 'API100React/css/styles2.css' %}" rel="stylesheet">
+      <link href="{% static 'API100React/css/introjs.css' %}" rel="stylesheet">
     {% endif %}
     <link rel="stylesheet" href="{% static 'API100React/css/jquery.bracket.min.css' %}">
     {% if object or stats or tests and 'Detail' in view.title  %}
@@ -30,6 +31,10 @@
     {% else %}
         <title>100React</title>
     {% endif %}
+
+    <!-- XDSoft DateTimePicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+    
 
     <!-- Analytics -->
     <script>
@@ -46,6 +51,20 @@
       });
       }}();
     </script>
+    <!-- Global site tag (gtag.js) - Google Ads: 945351453 -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-945351453"></script>
+    <script>
+       window.dataLayer = window.dataLayer || [];
+       function gtag(){dataLayer.push(arguments);}
+       gtag('js', new Date());
+
+       gtag('config', 'AW-945351453');
+   </script> -->
+   <!-- Event snippet for 100React Test conversion page -->
+   <!-- <script>
+       gtag('event', 'conversion', {'send_to': 'AW-945351453/VHBmCNHOpqkBEJ3W48ID'});
+   </script> -->
+
 
   </head>
   <body>
@@ -63,24 +82,31 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'marketing-home' %}">Tournament
+                        <a data-step="7" data-intro="Sign up for the tournament and your name will be included in the bracket. It's free." class="nav-link" href="{% url 'marketing-home' %}">Tournament
                         <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'test-test' %}">Test-Ranking</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'blog-home' %}">Blog</a>
+                        <a class="nav-link" data-step="6" data-intro="Here you can see the leaders and play against the leaders record to knocked them down" href="{% url 'test-test' %}">Test-Ranking</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Dropdown
+                        <a data-step="8" data-intro="Sign up to create 4 players single elimination Pomodoro tournaments with friends and family. It's free and the game is more challenging." class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Pomodoros
                         </a>
                         <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
-                        <a class="dropdown-item" href="{% url 'four-list' %}">Challenge</a>
-                        <a class="dropdown-item" href="{% url 'four-players' %}">Create Challenge</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="{% url 'pomodoros-home' %}">Pomodoros</a>
+                        <a  class="dropdown-item" href="{% url 'pomodoro-new' %}">Create Single Pomodoro</a>
+                        <a class="dropdown-item" href="{% url 'tournament:pomodoro-players' %}">Create Group Pomodoro</a>
+                        <a class="dropdown-item" href="{% url 'tournament:pomodoro-list' %}">See Group Pomodoro</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a data-step="9" data-intro="Sign up to create 4 players single elimination tournaments with friends and family. It's free and the game is more challenging." class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Challenge
+                        </a>
+                        <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
+                        <a class="dropdown-item" href="{% url 'tournament:four-list' %}">Challenge</a>
+                        <a  class="dropdown-item" href="{% url 'tournament:four-players' %}">Create Challenge</a>
                         </div>
                     </li>
                 </ul>
@@ -131,12 +157,31 @@
               <h1>Test Your Attention Span</h1>
           </div>
           <div class="test-subtitle col-sm-4 col-md-12 col-lg-8">
-              <h4>
-                  Click on the image and stop the counter on 97 for a single, 98 for a double,
-                  99 for a triple, 100 for a homerun and everything else is an out.
-                  See your baseball card after the test and check the leaders. No signup required
-                  for the test.
+
+              <h3>
+                  We <strong>gamify the Pomodoro focus technique</strong> using a simple reaction time test after
+                  users finished each task <strong>to test your focus</strong> and answer questions like,  how challenging was the task, 
+                  do you need a longer break, how is your focus after the task, etc, 
+                  base on the reaction time statistics.  During the Pomodoro session, 
+                  user will only be able to play <strong>during the first 30 seconds on each break</strong>; however, 
+                  if your goal is to continue improving your focus and cognitive skill playing our reaction time game, 
+                  you can challenge friends to a tournament or you can play a single game and share your baseball card 
+                  link with friends so they can play against your game stats. <strong class="group-pomodoro-text">Group Pomodoro available for teams and study groups.</strong>
+              </h3>
+              <h4> 
+                  <strong>
+                      Click on the image and stop the counter on 97 for a single, 98 for a double,
+                      99 for a triple, 100 for a homerun and everything else is an out.
+                      See your baseball card after the test and check the leaders. No signup required
+                      for the test.
+                  </strong> 
                 </h4>
+                <div class="rules">
+                    <div class="text-center">
+                        <a class="btn btn-outline-primary" href="javascript:void(0);" onclick="javascript:introJs().setOption('showProgress', true).start();">Rules</a>
+                      <a type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modalYT">Watch Video</a>                   
+                    </div>
+               </div>
           </div>
         {% endif %}
 
@@ -251,21 +296,133 @@
     </div>
     {% endif %}
 
+    <!-- Modal Section Pomodoro -->
+    {% if view.title == 'Pomodoro-Play' %}
+
+    <div class="pomodoro-modal" >
+        <div class="pomodoro-content" id="wrapper">
+            <h1 class="pomodoro-title">Pomodoro Timer</h1>
+    
+            <div id="pomodoro">  
+                <img src="{% static 'API100React/img/d1.jpeg' %}" id="pomodoro-img">
+                <div id="status"></div>
+                <div class="timerDisplay">25:00</div>
+                <button id="start-btn" class="btn">START</button>
+            </div>
+            
+            <div class="settings">
+                <div id="work">
+                <p>Work Duration</p>
+                <button class="btn-settings" id="work-plus">+</button>
+                <div><span id="work-min">25</span> mins</div>
+                <button class="btn-settings" id="work-minus">-</button>
+                </div>
+            
+                <button id="reset" class="btn">RESET</button>
+                <div id="break">
+                <p>Break Duration</p>
+                <button class="btn-settings" id="break-plus">+</button>
+                <div><span id="break-min">5</span> mins</div>
+                <button class="btn-settings" id="break-minus">-</button>
+                </div>
+            </div>
+            <div class="content-section pomodoro-form">  
+                <form name="stats" action="" method="POST" id="stats" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <fieldset class="form-group">
+                      <legend class="border-bottom mb-4 legend">Create Pomodoro</legend>
+                      <h4 class="title"></h4>
+                      <h6 class='result'></h6>
+                      {{ form|crispy }}
+                  </fieldset>
+                  <div class="form-group">
+                      <button class="btn btn-outline-primary save" type="submit">Start Pomodoro</button>
+                  </div>   
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    {% if request.get_full_path != "/stats/play/" and view.title != 'Play-Card' and view.title != 'Play-Two' %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+    {% if view.title == 'Take-Test' or view.title == 'Play-Test' %}
     <!-- Test -->
-      <script src="https://drive.google.com/uc?export=download&id=1rdLBD67sxLlA4iU3WZ2CRGHil_4PSbL7" type="text/javascript"></script>
+      <script src="{% static 'API100React/js/intro.js' %}"></script>
+      <script src="{% static 'API100React/js/test100react.js' %}" type="text/javascript"></script>
+      <!-- <script src="https://drive.google.com/uc?export=download&id=1rdLBD67sxLlA4iU3WZ2CRGHil_4PSbL7" type="text/javascript"></script> -->
     {% elif view.title == 'Play-Two' %}
     <!-- Two -->
       <script src="https://drive.google.com/uc?export=download&id=1yyketNaC4iqEIeVk6ovTJuiqbeeaO2B5" type="text/javascript"></script>
+    
+    {% elif view.title == 'Pomodoro-Play' %}
+    <!-- Pomodoro -->
+      <script src="{% static 'API100React/js/pomodoro.js' %}"></script>
     {% else %}
     <!-- Play -->
       <script src="https://drive.google.com/uc?export=download&id=1duMIXEwq8opS0PzpnGhuqTPTLu7xX7HI" type="text/javascript"></script>
     {% endif %}
+
+    <!-- Pomodoro Create -->
+    {% if view.title == 'Pomodoro-Create' %}
+      <script>
+        $(function () {
+          $("#id_createdAt").datetimepicker({
+            format: 'd/m/Y H:i',
+          });
+          
+        });
+      </script>
+    {% endif %}
+
+    <!--Modal: Name-->
+    <div class="modal fade" id="modalYT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+      
+          <!--Content-->
+          <div class="modal-content modal-video">
+      
+            <!--Body-->
+            <div class="modal-body mb-0 p-0">
+      
+              <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/AVGvqpGrrtM"
+                  allowfullscreen></iframe>
+              </div>
+      
+            </div>
+      
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+              <span class="mr-4">Spread the word!</span>
+              <a type="button" class="btn-floating btn-sm btn-fb">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <!--Twitter-->
+              <a type="button" class="btn-floating btn-sm btn-tw">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <!--Google +-->
+              <a type="button" class="btn-floating btn-sm btn-gplus">
+                <i class="fab fa-google-plus-g"></i>
+              </a>
+              <!--Linkedin-->
+              <a type="button" class="btn-floating btn-sm btn-ins">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+      
+              <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
+      
+            </div>
+      
+          </div>
+          <!--/.Content-->
+        </div>
+      </div>
 
     {% block scripts %} {% endblock %}
   </body>

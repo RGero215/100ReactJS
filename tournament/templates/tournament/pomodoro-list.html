@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+{% load static from staticfiles %}
+{% block content %}
+<table class="table table-hover table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Player One</th>
+        <th scope="col">Player Two</th>
+        <th scope="col">Player Three</th>
+        <th scope="col">Player Four</th>
+        <th scope="col">Date Posted</th>
+        <th scope="col">Detail</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for player in players %}
+            <tr>
+                <th scope="row">{{player.id}}</th>
+                <td>{{player.player_one}}</td>
+                <td>{{player.player_two}}</td>
+                <td>{{player.player_three}}</td>
+                <td>{{player.player_four}}</td>
+                <td>{{player.date_posted| date:'F d, Y'}}</td>
+                {% if player.ended %}
+                    <td><a class=" btn-outline-danger btn-sm" href="{% url 'tournament:pomodoro-detail' player.id %}">See</a></td>
+                {% else %}
+                    <td><a class=" btn-outline-primary btn-sm" href="{% url 'tournament:pomodoro-detail' player.id %}">Play</a></td>
+                {% endif %}
+            </a></tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

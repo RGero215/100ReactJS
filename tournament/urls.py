@@ -1,11 +1,16 @@
 from django.urls import path
 from .views import (TournamentListView, FourPlayersCreateView, FourPlayersDetailView,
-                    FourPlayersListView)
+                    FourPlayersListView, FourPomodoroCreateView, FourPomodoroDetailView,
+                    FourPomodoroListView)
 
+app_name = 'tournament'
 urlpatterns = [
     path('', TournamentListView.as_view(template_name='tournament/tournament.html'), name='tournament-home'),
     path('four/', FourPlayersListView.as_view(template_name='tournament/four-list.html'), name='four-list'),
     path('four/new/', FourPlayersCreateView.as_view(template_name='tournament/four-players.html'), name='four-players'),
     path('four/detail/<int:pk>/', FourPlayersDetailView.as_view(template_name='tournament/four-detail.html'), name='four-detail'),
+    path('four/pomodoro/', FourPomodoroListView.as_view(template_name='tournament/pomodoro-list.html'), name='pomodoro-list'),
+    path('four/pomodoro/new/', FourPomodoroCreateView.as_view(template_name='tournament/pomodoro-players.html'), name='pomodoro-players'),
+    path('four/pomodoro/detail/<int:pk>/', FourPomodoroDetailView.as_view(template_name='tournament/pomodoro-detail.html'), name='pomodoro-detail'),
 
 ]

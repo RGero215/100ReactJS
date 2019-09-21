@@ -32,6 +32,21 @@ class Four(models.Model):
 
     def get_absolute_url(self):
         return reverse('stats-detail', kwargs={'pk': self.pk})
+#
+class FourPomodoro(models.Model):
+    player_one = models.ForeignKey(User, on_delete=models.CASCADE)
+    player_two = models.ForeignKey(User, related_name='four_pomodoro_player_two', on_delete=models.CASCADE)
+    player_three = models.ForeignKey(User, related_name='four_pomodoro_player_three', on_delete=models.CASCADE)
+    player_four = models.ForeignKey(User, related_name='four_pomodoro_player_four', on_delete=models.CASCADE)
+    date_posted = models.DateTimeField(default=timezone.now)
+    ended = models.BooleanField(default=False)
+
+
+    def __str__(self):
+        return f'{self.player_one} vs {self.player_two} | {self.player_three} vs {self.player_four}'
+
+    def get_absolute_url(self):
+        return reverse('stats-detail', kwargs={'pk': self.pk})
 
 # class Six(models.Model):
 #     player_one = models.ForeignKey(Statistics, on_delete=models.CASCADE)

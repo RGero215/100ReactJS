@@ -43,7 +43,7 @@ class Test100ReactPlayCreate(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('play-detail', kwargs={'home' : self.object.pk})
+        return reverse('play-detail', kwargs={'away': self.kwargs['away'], 'pk' : self.object.pk})
 
     def get_form_kwargs(self, *args, **kwargs):
         kwargs = super(Test100ReactPlayCreate, self).get_form_kwargs(

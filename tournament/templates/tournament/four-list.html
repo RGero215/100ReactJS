@@ -23,9 +23,9 @@
                 <td>{{player.player_four}}</td>
                 <td>{{player.date_posted| date:'F d, Y'}}</td>
                 {% if player.ended %}
-                    <td><a class=" btn-outline-danger btn-sm" href="{% url 'four-detail' player.id %}">See</a></td>
+                    <td><a class=" btn-outline-danger btn-sm" href="{% url 'tournament:four-detail' player.id %}">See</a></td>
                 {% else %}
-                    <td><a class=" btn-outline-primary btn-sm" href="{% url 'four-detail' player.id %}">Play</a></td>
+                    <td><a class=" btn-outline-primary btn-sm" href="{% url 'tournament:four-detail' player.id %}">Play</a></td>
                 {% endif %}
             </a></tr>
         {% endfor %}

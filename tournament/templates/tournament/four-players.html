@@ -6,7 +6,7 @@
             <form action="" method="POST">
                     {% csrf_token %}
                     <fieldset class="form-group">
-                        <legend class="border-bottom mb-4">100React Two Players Tournament </legend>
+                        <legend class="border-bottom mb-4">100React Four Players Tournament </legend>
                         {{ form|crispy }}
                     </fieldset>
                     <div class="form-group">
@@ -14,7 +14,7 @@
                     </div>
             </form>
             <div class="border-top pt-3">
-                <small class="text-muted"> See your <a href="{% url 'four-list' %}" class="ml-2"> Challenges</a> </small>
+                <small class="text-muted"> See your <a href="{% url 'tournament:four-list' %}" class="ml-2"> Challenges</a> </small>
             </div>
         </div>
     <div class="tournament"></div>   

@@ -1,0 +1,30 @@
+{% extends "blog/base.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+    <div class="app">
+        <div class="container stopwatch">
+            <div class="clock inactive z-depth-1">
+                <img class="stadium" data-step="1" data-intro="click the image to start and stop the counter" src="{% static 'API100React/img/d1.jpeg' %}" alt="stadium">
+                <img class="empty" data-step="3" data-intro="97 is a single, 98 a double, 99 a triple and 100 a home run" src="{% static 'API100React/img/empty.png' %}" alt="empty">
+                <img class="noOuts" data-step="4" data-intro="Everything else is an out." src="{% static 'API100React/img/noOuts.png' %}" alt="noOuts">
+                <h1 class="away">AWAY</h1>
+                <h1 class="awayScore">10</h1>
+                <h1 data-step="5" data-intro="Try to get as many runs as you can to earn points and set a new record" class="homeScore">0</h1>
+                {% if  user.is_authenticated %}
+                    <h1 class="username">{{ user.username }}</h1>
+                    <input class="userId" type="hidden" value="{{user.id}}">
+                    <input type="hidden" class="challengeId" value="{{challenge.id}}">
+                {% else %}
+                    <h1 class="username">HOME</h1>
+                {% endif %}
+                <h1 class="inn">In</h1>
+                <h1 class="innNo">1</h1>
+                <span class="counter" data-step="2" data-intro="Try to stop the counter between 97 and 100" id="fiveSE">0</span>
+                <div class="overlay waves-effect"></div>
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock %}
