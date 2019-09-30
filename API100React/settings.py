@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -178,3 +179,10 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID=1
 
+REST_FRAMEWORK = {
+    'PAGINATE_BY': 100,
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'API100React.renderers.BrowsableAPIRendererWithoutForms',
+    ),
+}

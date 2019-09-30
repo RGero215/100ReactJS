@@ -7,6 +7,8 @@ from users.forms import UserRegisterForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from tournament.models import Four
+from rest_framework import viewsets
+from .serializers import OnePLayerSerializer, StatisticsSerializer, TwoGamesSerializer
 
 # Create your views here.
 class StatsListView(LoginRequiredMixin, ListView):
@@ -107,5 +109,17 @@ class TwoGamesCreateView(LoginRequiredMixin, CreateView):
 class TwoGamesDetailView(LoginRequiredMixin, DetailView):
     model = TwoGames
     title = 'Two-Games-Detail'
+
+class StatisticsAPI(viewsets.ModelViewSet):
+    queryset = Statistics.objects.all()
+    serializer_class = StatisticsSerializer
+
+class OnePlayerAPI(viewsets.ModelViewSet):
+    queryset = OnePLayer.objects.all()
+    serializer_class = OnePLayerSerializer
+
+class TwoGamesAPI(viewsets.ModelViewSet):
+    queryset = TwoGames.objects.all()
+    serializer_class = TwoGamesSerializer
 
     

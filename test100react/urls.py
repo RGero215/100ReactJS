@@ -1,11 +1,15 @@
-from django.urls import path
+from django.urls import path, include
 from .views import (Test100ReactListView, Test100ReactDetailView, 
                     Test100ReactCreate, Test100ReactPlayCreate, 
-                    Test100ReactPlayDetailView, PlayerListView)
+                    Test100ReactPlayDetailView, PlayerListView, Test100ReactAPI)
+from rest_framework import routers
 
+router = routers.DefaultRouter()
+router.register('testAPI', Test100ReactAPI)
 
 urlpatterns = [
     path('', Test100ReactCreate.as_view(template_name='test100react/test-create.html'), name='test-create'),
+    path('api/', include(router.urls)),
     path('test/', Test100ReactListView.as_view(template_name='test100react/test.html'), name='test-test'),
     path('test/<int:pk>/', Test100ReactDetailView.as_view(template_name='test100react/test-detail.html'), name='test-detail'),
     path('test/<int:away>/play/', Test100ReactPlayCreate.as_view(template_name='test100react/test-play.html'), name='test-play'),

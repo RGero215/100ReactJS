@@ -3,6 +3,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
+from .models import Profile, User
+from rest_framework import viewsets
+from .serializers import ProfileSerializer, UserSerializer
 
 def register(request):
     if request.method == 'POST':
@@ -36,3 +39,11 @@ def profile(request):
         'p_form': p_form,
     }
     return render(request, 'users/profile.html', context)
+
+class ProfileAPI(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+class UserAPI(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

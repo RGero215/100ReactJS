@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from django.contrib.auth.models import User
 from .models import Groups
+from rest_framework import viewsets
+from .serializers import GroupsSerializer
 
 class HomePage(ListView):
     model = Groups
@@ -22,6 +24,10 @@ class HomePage(ListView):
             pass
         
         return context
+
+class GroupAPI(viewsets.ModelViewSet):
+    queryset = Groups.objects.all()
+    serializer_class = GroupsSerializer
 
     
 

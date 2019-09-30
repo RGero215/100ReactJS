@@ -1,9 +1,14 @@
-from django.urls import path
+from django.urls import path, include
 from .views import (PomodoroListView, PomodoroDetailView, PomodoroCreateView,
-            PomodoroUpdateView, PomodoroGroupCreateView, PomodoroSingleUpdateView)
+            PomodoroUpdateView, PomodoroGroupCreateView, PomodoroSingleUpdateView, PomodoroAPI)
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('pomodoroAPI', PomodoroAPI)
 
 urlpatterns = [
     path('', PomodoroListView.as_view(template_name='pomodoro/pomodoros.html'),name='pomodoros-home'),
+    path('api/', include(router.urls)),
     path('new/', PomodoroCreateView.as_view(template_name='pomodoro/new.html'), name='pomodoro-new'),
     path('new/single/<int:pk>/', PomodoroSingleUpdateView.as_view(template_name='pomodoro/play.html'), name='single-play'),
     path('new/<int:challenge>/', PomodoroGroupCreateView.as_view(template_name='pomodoro/newgroup.html'), name='pomodoro-newgroup'),

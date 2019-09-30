@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Test100React
 from django.contrib import messages
+from rest_framework import viewsets
+from .serializers import Test100ReactSerializer
 
 # Create your views here.
 class Test100ReactListView(ListView):
@@ -77,3 +79,8 @@ class PlayerListView(ListView):
 
     def get_queryset(self):
         return Test100React.objects.filter(player=self.kwargs.get('player')).order_by('-points')
+
+
+class Test100ReactAPI(viewsets.ModelViewSet):
+    queryset = Test100React.objects.all()
+    serializer_class = Test100ReactSerializer

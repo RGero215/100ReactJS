@@ -10,6 +10,25 @@
                         <div class="banner-img">
                             <img src="{{ object.image.url }}" alt="Image 1">
                         </div>
+                        <div class="dates">
+                            <div class="start">
+                                <strong>Task One</strong> {{object.task_one}}
+                                <span></span>
+                            </div>
+                            <div class="ends">
+                                <strong>Task Two</strong> {{object.task_two}}
+                            </div>
+                        </div>
+
+                        <div class="dates">
+                            <div class="start">
+                                <strong>Task Three</strong> {{object.task_three}}
+                                <span></span>
+                            </div>
+                            <div class="ends">
+                                <strong>Task Four</strong> {{object.task_four}}
+                            </div>
+                        </div>
 
                         <div class="dates">
                             <div class="start">
@@ -129,7 +148,7 @@
 
                         <div class="footer">
                             <a href="#" class="Cbtn btn-outline-primary" id="checkout-button-Donation">Donate</a>
-                            <a href="{% url 'play-card' object.id %}" class="Cbtn btn-primary" >PLAY</a>
+                            <a href="{% url 'single-play' object.id %}" class="Cbtn btn-primary" >REDO</a>
                         </div>
                     </div>
                 </div> 

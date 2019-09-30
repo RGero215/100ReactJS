@@ -7,7 +7,8 @@ from users.forms import UserRegisterForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from tournament.models import FourPomodoro
-
+from rest_framework import viewsets
+from .serializers import PomodoroSerializer
 
 
 
@@ -107,3 +108,7 @@ class PomodoroUpdateView(LoginRequiredMixin, UpdateView):
         challenge = get_object_or_404(FourPomodoro, pk=self.kwargs['challenge'])
         context['challenge'] = challenge
         return context
+
+class PomodoroAPI(viewsets.ModelViewSet):
+    queryset = Pomodoro.objects.all()
+    serializer_class = PomodoroSerializer

@@ -9,6 +9,8 @@ from .models import Four, FourPomodoro
 import simplejson as json
 from stats.models import TwoGames
 from pomodoro.models import Pomodoro
+from rest_framework import viewsets
+from .serializers import FourSerializer, FourPomodoroSerializer
 
 # Create your views here.
 
@@ -382,8 +384,13 @@ class FourPomodoroDetailView(DetailView):
         return context
 
 
-# def email_confirmation(request):
-#     return render(request, 'tournament/email-confirmation.html')
+class FourPlayersAPI(viewsets.ModelViewSet):
+    queryset = Four.objects.all()
+    serializer_class = FourSerializer
+
+class FourPomodoroAPI(viewsets.ModelViewSet):
+    queryset = FourPomodoro.objects.all()
+    serializer_class = FourPomodoroSerializer
 
 
 
