@@ -33,3 +33,12 @@ GET /tournament/api/fourPomodoroAPI/
 /profile/api/
 /profile/api/profileAPI/
 /profile/api/userAPI/
+/profile/api/loginAPI/
+/profile/api/userRegisterAPI/
+
+## All routes require token except /loginAPI/ and /userRegisterAPI/ 
+### Include token in the heather as key value pair. Ex:
+{
+    "Authorization": "Token b39caa41531228e02714c075fef300bd5419370f"
+}
+### Token are created when user register and also in the login form for existing user in production without token the first time they login. After that login will filter token by user id.
