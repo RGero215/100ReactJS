@@ -1,11 +1,20 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 from .models import Profile, User
 from rest_framework import viewsets
-from .serializers import ProfileSerializer, UserSerializer
+from .serializers import ProfileSerializer, UserSerializer, LoginSerializer, UserRegisterSerializer
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.views import APIView
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+    IsAdminUser,
+    IsAuthenticatedOrReadOnly,
+)
 
 def register(request):
     if request.method == 'POST':
@@ -47,3 +56,24 @@ class ProfileAPI(viewsets.ModelViewSet):
 class UserAPI(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class LoginAPI(APIView):
+    permission_classes = [AllowAny]
+    serializer_class = LoginSerializer
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        serializer = LoginSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            new_data = serializer.data
+            return Response(new_data, status=HTTP_200_OK)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+
+class UserRegisterAPI(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
+    queryset = User.objects.all()
+    serializer_class = UserRegisterSerializer
+
+class APIRootView(APIView):
+    _ignore_model_permissions = True

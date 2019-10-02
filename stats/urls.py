@@ -8,6 +8,7 @@ from .views import (StatsListView, StatsDetailView,
 from rest_framework import routers
 
 router = routers.DefaultRouter()
+router.get_api_root_view().cls.__name__ = "100React API"
 router.register('statisticsAPI', StatisticsAPI)
 router.register('onePlayerAPI', OnePlayerAPI)
 router.register('twoGamesAPI', TwoGamesAPI)

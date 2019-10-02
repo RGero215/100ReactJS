@@ -32,7 +32,7 @@ class PomodoroCreateView(LoginRequiredMixin, CreateView):
     model = Pomodoro
     title = 'Pomodoro-Create'
     fields = ['title','task_one', 'task_two', 'task_three', 
-        'task_four', 'donation']
+        'task_four']
 
     def form_valid(self, form):
         form.instance.player = self.request.user
