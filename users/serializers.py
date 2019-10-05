@@ -36,12 +36,12 @@ class LoginSerializer(serializers.ModelSerializer):
         if user_obj:
             if not user_obj.check_password(password):
                 raise serializers.ValidationError('Incorrect username/password')
-            else:
-                token = Token.objects.filter(user_id=user_obj.id).first()
-                data['token'] = token
-                return data
-        
-        data['token'] = Token.objects.create(user=user_obj) # Keep for those current user without token
+    
+        if token == None:
+            data['token'] = Token.objects.create(user=user_obj) # Keep for those current user without token
+        else:
+            token = Token.objects.filter(user_id=user_obj.id).first()
+            data['token'] = token
 
         return data
 
