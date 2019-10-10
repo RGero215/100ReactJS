@@ -7,7 +7,9 @@
                 {% csrf_token %}
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4"> Login </legend>
-                    {{ form|crispy }}
+                    {% autoescape off %}
+                        {{ form|crispy|escape }}
+                    {% endautoescape %}
                 </fieldset>
                 <div class="form-group">
                     <button class="btn btn-outline-primary" type="submit"> Login </button>

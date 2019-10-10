@@ -9,6 +9,12 @@ from django.contrib import messages
 from tournament.models import Four
 from rest_framework import viewsets
 from .serializers import OnePLayerSerializer, StatisticsSerializer, TwoGamesSerializer
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+    IsAdminUser,
+    IsAuthenticatedOrReadOnly,
+)
 
 # Create your views here.
 class StatsListView(LoginRequiredMixin, ListView):
@@ -111,14 +117,17 @@ class TwoGamesDetailView(LoginRequiredMixin, DetailView):
     title = 'Two-Games-Detail'
 
 class StatisticsAPI(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
     queryset = Statistics.objects.all()
     serializer_class = StatisticsSerializer
 
 class OnePlayerAPI(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
     queryset = OnePLayer.objects.all()
     serializer_class = OnePLayerSerializer
 
 class TwoGamesAPI(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
     queryset = TwoGames.objects.all()
     serializer_class = TwoGamesSerializer
 

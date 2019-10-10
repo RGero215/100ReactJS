@@ -9,6 +9,12 @@ from django.contrib import messages
 from tournament.models import FourPomodoro
 from rest_framework import viewsets
 from .serializers import PomodoroSerializer
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+    IsAdminUser,
+    IsAuthenticatedOrReadOnly,
+)
 
 
 
@@ -110,5 +116,6 @@ class PomodoroUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
 class PomodoroAPI(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
     queryset = Pomodoro.objects.all()
     serializer_class = PomodoroSerializer

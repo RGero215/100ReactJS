@@ -18,7 +18,7 @@ class LoginSerializer(serializers.ModelSerializer):
     username = serializers.CharField(required=True)
     class Meta:
         model = User
-        fields = ['username', 'password', 'token']
+        fields = ['username', 'password', 'token', 'id']
         extra_kwargs = {'password': {'write_only': True}}
     
     def validate(self, data):
@@ -39,6 +39,8 @@ class LoginSerializer(serializers.ModelSerializer):
             else:
                 token = Token.objects.filter(user_id=user_obj.id).first()
                 data['token'] = token
+                data['id'] = user_obj.id
+                print("DATA USER ID: ", data['id'])
 
         if token == None:
             data['token'] = Token.objects.create(user=user_obj) # Keep for those current user without token

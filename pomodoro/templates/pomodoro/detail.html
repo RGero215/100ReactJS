@@ -178,7 +178,8 @@
         // a successful payment.
         // Instead use one of the strategies described in
         // https://stripe.com/docs/payments/checkout/fulfillment
-        successUrl: window.location.protocol + '//127.0.0.1:8000/pomodoro/1/',
+        // TODO: route for production redirection
+        successUrl: window.location.protocol + '//127.0.0.1:8000/pomodoro/1/', 
         cancelUrl: window.location.protocol + '//rising2dtop.org/canceled',
         })
         .then(function (result) {
@@ -191,5 +192,7 @@
         });
     });
     </script>
+
+    
 
 {% endblock content %}

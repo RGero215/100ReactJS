@@ -4,6 +4,12 @@ from .models import Test100React
 from django.contrib import messages
 from rest_framework import viewsets
 from .serializers import Test100ReactSerializer
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+    IsAdminUser,
+    IsAuthenticatedOrReadOnly,
+)
 
 # Create your views here.
 class Test100ReactListView(ListView):
@@ -82,5 +88,6 @@ class PlayerListView(ListView):
 
 
 class Test100ReactAPI(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
     queryset = Test100React.objects.all()
     serializer_class = Test100ReactSerializer
