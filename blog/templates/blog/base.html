@@ -95,6 +95,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
                         <a class="dropdown-item" href="{% url 'pomodoros-home' %}">Pomodoros</a>
+                        <a class="dropdown-item" href="{% url 'user-pomodoro' user.id %}">User Pomodoros</a>
                         <a  class="dropdown-item" href="{% url 'pomodoro-new' %}">Create Single Pomodoro</a>
                         <a class="dropdown-item" href="{% url 'tournament:pomodoro-players' %}">Create Group Pomodoro</a>
                         <a class="dropdown-item" href="{% url 'tournament:pomodoro-list' %}">See Group Pomodoro</a>

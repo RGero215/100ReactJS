@@ -24,7 +24,8 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', include('test100react.urls')),
-    path('admin/', admin.site.urls),
+    path('100ReactAdminSite/', admin.site.urls),
+    path('admin/', include('admin_honeypot.urls', namespace='admin-honeypot')),
     path('blog/', include('blog.urls')),
     path('stats/', include('stats.urls')),
     path('tournament/', include('tournament.urls', namespace='tournament')),

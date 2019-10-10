@@ -9,6 +9,9 @@ from django.contrib import messages
 from tournament.models import FourPomodoro
 from rest_framework import viewsets
 from .serializers import PomodoroSerializer
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.views import APIView
 from rest_framework.permissions import (
     AllowAny,
     IsAuthenticated,
@@ -27,6 +30,17 @@ class PomodoroListView(LoginRequiredMixin, ListView):
     context_object_name = 'pomodoros'
     paginate_by = 10
     title = 'Pomodoros'
+
+class UserPomodoroListView(LoginRequiredMixin, ListView):
+    model = Pomodoro
+    template_name = 'pomodoro/user_pomodoro.html'
+    context_object_name = 'pomodoros'
+    paginate_by = 10
+    title = 'User-Pomodoro'
+
+    def get_queryset(self):
+        user_id = get_object_or_404(User, id=self.kwargs.get('pk'))
+        return Pomodoro.objects.filter(player=user_id).order_by('-createdAt')
      
      
 class PomodoroDetailView(LoginRequiredMixin, DetailView): 
@@ -119,3 +133,18 @@ class PomodoroAPI(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     queryset = Pomodoro.objects.all()
     serializer_class = PomodoroSerializer
+
+
+class UserPomodoroAPI(APIView):
+    permission_classes = [AllowAny]
+    # serializer_class = PomodoroSerializer
+
+    def get(self, request, pk, format=None):
+        return self.get_queryset(pk)
+
+    def get_queryset(self, pk):
+        queryset = Pomodoro.objects.filter(player=pk).order_by('-createdAt')
+        serializer = PomodoroSerializer(queryset, many=True)
+        data = serializer.data
+        return Response(data, status=HTTP_200_OK)
+    
