@@ -40,6 +40,22 @@ GET /tournament/api/fourPomodoroAPI/
 /pomodoro/api/user/ID/
 example: /pomodoro/api/user/1/
 
+## Baseball API List
+GET /baseball/api/baseballAPI/
+POST /baseball/api/baseballAPI/
+
+## Game API List
+GET /game/api/gameAPI/
+POST /game/api/gameAPI/
+
+## Task API List
+GET /task/api/taskAPI/
+POST /task/api/taskAPI/
+
+## Timer API List
+GET /timer/api/timerAPI/
+POST /timer/api/timerAPI/
+
 ## All routes require token except /loginAPI/ and /userRegisterAPI/ 
 ### Include token in the heather as key value pair. Ex:
 {

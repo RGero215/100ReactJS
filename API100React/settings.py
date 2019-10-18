@@ -31,6 +31,10 @@ ALLOWED_HOSTS = ['167.71.251.44', '127.0.0.1', '100react.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'tasks.apps.TasksConfig',
+    'timer.apps.TimerConfig',
+    'games.apps.GamesConfig',
+    'baseball.apps.BaseballConfig',
     'pomodoro.apps.PomodoroConfig',
     'test100react.apps.Test100ReactConfig',
     'marketing.apps.MarketingConfig',
