@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/', include('admin_honeypot.urls', namespace='admin-honeypot')),
     path('blog/', include('blog.urls')),
     path('baseball/', include('baseball.urls')),
+    path('decks/', include('decks.urls')),
     path('task/', include('tasks.urls')),
     path('timer/', include('timer.urls')),
     path('game/', include('games.urls')),
